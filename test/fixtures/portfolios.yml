@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  portfolio_value: 9.99
+  gain_loss: 9.99
+  investment_value: 9.99
+  book_cost: 9.99
+  cash: 9.99
+
+two:
+  user_id: 1
+  portfolio_value: 9.99
+  gain_loss: 9.99
+  investment_value: 9.99
+  book_cost: 9.99
+  cash: 9.99
