@@ -10,41 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_220357) do
+ActiveRecord::Schema.define(version: 2020_04_23_022648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "portfolio_stocks", force: :cascade do |t|
-    t.integer "portfolio_id"
-    t.string "ticker"
-    t.string "name"
-    t.decimal "current_price"
-    t.string "stock_exchange"
-    t.decimal "dividend_yield"
-    t.decimal "dividend_per_share"
-    t.integer "quantity"
-    t.decimal "book_cost"
-    t.decimal "market_value"
-    t.decimal "gain_loss"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "portfolios", force: :cascade do |t|
-    t.integer "user_id"
-    t.decimal "portfolio_value"
-    t.decimal "gain_loss"
-    t.decimal "investment_value"
-    t.decimal "book_cost"
-    t.decimal "cash"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "user_name"
-    t.string "password"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
