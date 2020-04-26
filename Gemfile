@@ -26,6 +26,8 @@ gem 'httparty'
 # gem 'image_processing', '~> 1.2'
 gem 'react-rails'
 
+gem 'clearance', '~> 1.12', '>= 1.12.1'
+
 gem 'devise'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

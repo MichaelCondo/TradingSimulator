@@ -1,0 +1,9 @@
+<h1>Portfolio</h1>
+<p>Welcome to your Portfolio</p>
+<h1><%= @current_user.email %></h1>
+
+<% if flash[:success] %>
+  <div class='alert alert-success'><%= flash[:success] %></div>
+<% end %>
+
+<%= link_to 'Click here to log out.', logout_path %>

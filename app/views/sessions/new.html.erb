@@ -1,0 +1,23 @@
+<p>Please log in to continue.</p>
+
+<%- if flash[:error] %>
+<div class='alert alert-danger'><%= flash[:error] %></div>
+<% end %>
+
+<%= form_for :session, url: sessions_path do |f| %>
+  <div class='form-group'>
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
+  </div>
+  <div class='form-group'>
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+  </div>
+  <div class='form-group'>
+    <%= f.submit 'Log In', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<p >
+  New User? <%= link_to 'Click here to create an account.', new_user_path %>
+</p>
