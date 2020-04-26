@@ -1,33 +1,40 @@
-<h1>Sign Up</h1>
-<p>Create a new account using the form below.  All fields are required.</p>
+<html>
 
-<% if @user.errors.any? %>
+<body style="background-color:black; text-align:center; color: white;">
+  <h1 style="margin-top: 50px;">Register</h1>
+
+<div style="display: inline-block;">
+  <% if @user.errors.any? %>
   <div class='alert alert-danger'>
     <p>Please correct the following errors:</p>
     <ul>
       <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <li><%= msg %></li>
       <% end %>
     </ul>
   </div>
-<% end %>
+  <% end %>
 
-<%= form_for @user do |f| %>
-  <div class='form-group'>
-    <%= f.label :email %>
-    <%= f.email_field :email, class: 'form-control' %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :password %>
-    <%= f.password_field :password, class: 'form-control' %>
-  </div>
-  <div class='form-group'>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, class: 'form-control' %>
-  </div>
-  <%= f.submit 'Register', class: 'btn btn-primary' %>
-<% end %>
+    <%= form_for @user do |f| %>
+      <div class='form-group'>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control', placeholder: 'Email' %>
+      </div>
+      <div class='form-group'>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+      </div>
+      <div class='form-group'>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password' %>
+      </div>
+      <%= f.submit 'Register', class: 'btn btn-light' %>
+    <% end %>
+  <div>
 
-<p >
-  Already have an account? <%= link_to 'Click here to sign in.', login_path %>
-</p>
+  <p style="margin-top: 10px;">
+    Already have an account? <%= link_to 'Login', login_path %>
+  </p>
+</body>
+
+</html>

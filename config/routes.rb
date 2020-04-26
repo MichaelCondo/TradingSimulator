@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'portfolio#show'
+  root 'portfolios#show'
   get 'login', to: 'sessions#new'
   get 'logout', to: 'sessions#destroy'
 
