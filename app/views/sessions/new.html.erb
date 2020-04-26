@@ -17,13 +17,13 @@
           <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
         </div>
         <div class='form-group'>
-          <%= f.submit 'Log In', class: 'btn btn-light' %>
+          <%= f.submit 'Log In', class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF' %>
         </div>
       <% end %>
     </div>
 
     <p style="margin-top: 10px;">
-      New User? <%= link_to 'Register', new_user_path %>
+      New User? <%= link_to 'Register', new_user_path, style: 'color:#0CBE86' %>
     </p>
 
 </body>

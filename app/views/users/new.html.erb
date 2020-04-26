@@ -28,12 +28,12 @@
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password' %>
       </div>
-      <%= f.submit 'Register', class: 'btn btn-light' %>
+      <%= f.submit 'Register', class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF' %>
     <% end %>
   <div>
 
   <p style="margin-top: 10px;">
-    Already have an account? <%= link_to 'Login', login_path %>
+    Already have an account? <%= link_to 'Login', login_path, style: 'color:#0CBE86' %>
   </p>
 </body>
 
