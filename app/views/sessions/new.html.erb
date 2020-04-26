@@ -3,7 +3,7 @@
 <body style="background-color:black; text-align:center; color: white;">
   <h1 style="margin-top: 50px;">Log In</h1>
     <div style="display: inline-block;">
-      <%- if flash[:error] %>
+      <%- if flash[:error] && flash[:error] != 'You must be logged in to access that page!' %>
         <div class='alert alert-danger'><%= flash[:error] %></div>
       <% end %>
 

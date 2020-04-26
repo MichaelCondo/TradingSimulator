@@ -1,9 +1,10 @@
-<h1>Portfolio</h1>
-<p>Welcome to your Portfolio</p>
-<h1><%= @current_user.email %></h1>
+<html>
 
-<% if flash[:success] %>
-  <div class='alert alert-success'><%= flash[:success] %></div>
-<% end %>
+  <body style="background-color:black; color: white; margin-left: 16%;">
+    <h1>Portfolio</h1>
+    <p>Welcome to your Portfolio</p>
+    <h1><%= @current_user.email %></h1>
 
-<%= link_to 'Log Out', logout_path %>
+  </body>
+
+</html>

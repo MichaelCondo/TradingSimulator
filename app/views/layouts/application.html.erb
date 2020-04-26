@@ -8,9 +8,43 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css' %>
 
+    <style>
+      .sidenav {
+        height: 100%;
+        width: 15%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #0CBE86;
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+
+      .sidenav a {
+        padding: 6px 8px 6px 16px;
+        border-color: #000000;
+        border-radius: 25px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #FFFFFF;
+        display: block;
+      }
+
+      .sidenav a:hover {
+        color: #000000;
+      }
+    </style>
   </head>
 
   <body>
+    <% if @signed_in %>
+      <div class="sidenav">
+        <%= link_to 'Portfolio', root_path %>
+        <%= link_to 'Trade', logout_path %>
+        <%= link_to 'Log Out', logout_path %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>
