@@ -10,6 +10,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      @portfolio = Portfolio.create!(user_id: @user.id, portfolio_value: 0.00, gain_loss: 0.00,
+        investment_value: 0.00, book_cost: 0.00, cash: 0.00)
+      @portfolio.save
       session[:user_id] = @user.id
       flash[:success] =  'You have successfully created an account!'
       redirect_to root_path
