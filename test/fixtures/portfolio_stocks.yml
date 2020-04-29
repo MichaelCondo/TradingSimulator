@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  portfolio: one
+  ticker: MyString
+  name: MyString
+  current_price: 9.99
+  exchange: MyString
+  dividend_yield: 9.99
+  dividend_per_share: 9.99
+  quantity: 1
+  book_cost: 9.99
+  market_value: 9.99
+  gain_loss: 9.99
+
+two:
+  portfolio: two
+  ticker: MyString
+  name: MyString
+  current_price: 9.99
+  exchange: MyString
+  dividend_yield: 9.99
+  dividend_per_share: 9.99
+  quantity: 1
+  book_cost: 9.99
+  market_value: 9.99
+  gain_loss: 9.99
