@@ -1,7 +1,7 @@
 <html>
 
   <body style="background-color:black; color: white; margin-left: 16%;">
-    <h1>Trade</h1>
+    <h1 style="margin-bottom: 3%">Trade</h1>
 
     <%= form_tag(search_trade_path, :method => "get") do %>
       <div class="input-group" style="width: 28%;">
@@ -10,18 +10,36 @@
       </div>
     <% end %>
 
-    <% if @parameter %>
-      <h1><%= @parameter %></h1>
-    <% end %>
-    <% if @response %>
-      <h6><%= @response.parsed_response.first['symbol'] %></h6>
-      <h6><%= @response.parsed_response.first['name'] %></h6>
-      <h6><%= @response.parsed_response.first['price'] %></h6>
-      <h6><%= @response.parsed_response.first['changesPercentage'] %></h6>
-    <% end %>
+    <div style="margin-left: 33%;">
+      <%= link_to 'Buy', buy_trade_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF; margin-right: 2%;' %>
+      <%= link_to 'Sell', sell_trade_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF' %>
+    </div>
 
-    <%= link_to 'Buy', buy_trade_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF; margin-right: 1%;' %>
-    <%= link_to 'Sell', sell_trade_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF' %>
+    <% if @response %>
+      <h3>Quote</h3>
+      <table class="table" style="background-color:#0CBE86; color:#FFFFFF;">
+        <thead>
+          <tr>
+            <th scope="col">Ticker</th>
+            <th scope="col">Name</th>
+            <th scope="col">Stock Exchange</th>
+            <th scope="col">Price</th>
+            <th scope="col">Change</th>
+            <th scope="col">Change Percent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @response.parsed_response.first['symbol'] %></td>
+            <td><%= @response.parsed_response.first['name'] %></td>
+            <td><%= @response.parsed_response.first['exhange'] %></td>
+            <td><%= @response.parsed_response.first['price'] %></td>
+            <td><%= @response.parsed_response.first['change'] %></td>
+            <td><%= @response.parsed_response.first['changesPercentage'].to_s + "%" %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
 
   </body>
 
