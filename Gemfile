@@ -28,6 +28,12 @@ gem 'react-rails'
 
 gem 'clearance', '~> 1.12', '>= 1.12.1'
 
+gem 'yahoo-finance', '~> 1.2', '>= 1.2.1'
+
+gem 'stock_quote'
+
+gem 'google-finance-ruby-client'
+
 gem 'devise'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

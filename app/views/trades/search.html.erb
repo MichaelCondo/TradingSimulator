@@ -1,0 +1,28 @@
+<html>
+
+  <body style="background-color:black; color: white; margin-left: 16%;">
+    <h1>Trade</h1>
+
+    <%= form_tag(search_trade_path, :method => "get") do %>
+      <div class="input-group" style="width: 28%;">
+        <%= search_field_tag :search, params[:search], placeholder: "Ticker (ex. MSFT, AAPL, AMZN)", class: "form-control" %>
+          <%= button_tag 'Search', class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF' %>
+      </div>
+    <% end %>
+
+    <% if @parameter %>
+      <h1><%= @parameter %></h1>
+    <% end %>
+    <% if @response %>
+      <h6><%= @response.parsed_response.first['symbol'] %></h6>
+      <h6><%= @response.parsed_response.first['name'] %></h6>
+      <h6><%= @response.parsed_response.first['price'] %></h6>
+      <h6><%= @response.parsed_response.first['changesPercentage'] %></h6>
+    <% end %>
+
+    <%= link_to 'Buy', buy_trade_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF; margin-right: 1%;' %>
+    <%= link_to 'Sell', sell_trade_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF' %>
+
+  </body>
+
+</html>
