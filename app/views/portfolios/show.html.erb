@@ -25,36 +25,39 @@
         </tbody>
       </table>
 
-      <h3 style="margin-top: 5%;">Holdings</h3>
-      <table class="table" style="background-color:#0CBE86; color:#FFFFFF;">
-        <thead>
-          <tr>
-            <th scope="col">Ticker</th>
-            <th scope="col">Company Name</th>
-            <th scope="col">Stock Exchange</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Price</th>
-            <th scope="col">Market Value</th>
-            <th scope="col">Book Cost</th>
-            <th scope="col">Gain/Loss</th>
-            <th scope="col">Dividend Yield</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row"><%=  %></th>
-            <td><%=  %></td>
-            <td><%=  %></td>
-            <td><%=  %></td>
-            <td><%=  %></td>
-            <td><%=  %></td>
-            <td><%=  %></td>
-            <td><%=  %></td>
-            <td><%=  %></td>
-          </tr>
-        </tbody>
-      </table>
-
+      <% if @has_stocks %>
+        <h3 style="margin-top: 5%;">Holdings</h3>
+        <table class="table" style="background-color:#0CBE86; color:#FFFFFF;">
+          <thead>
+            <tr>
+              <th scope="col">Ticker</th>
+              <th scope="col">Company Name</th>
+              <th scope="col">Stock Exchange</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Market Value</th>
+              <th scope="col">Book Cost</th>
+              <th scope="col">Gain/Loss</th>
+              <th scope="col">Dividend Yield</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @current_user.portfolio.portfolio_stocks.each do |stock| %>
+              <tr>
+                <td><%= stock.ticker %></td>
+                <td><%= stock.name %></td>
+                <td><%= stock.exchange %></td>
+                <td><%= stock.quantity %></td>
+                <td><%= format_to_currency(stock.current_price) %></td>
+                <td><%= format_to_currency(stock.market_value) %></td>
+                <td><%= format_to_currency(stock.book_cost) %></td>
+                <td><%= format_to_currency(stock.gain_loss) %></td>
+                <td><%= ((stock.dividend_yield).round(2).to_s) + "%" %></td>
+              </tr>
+            <% end; nil %>
+          </tbody>
+        </table>
+      <% end %>
   </body>
 
 </html>
