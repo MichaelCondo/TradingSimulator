@@ -10,12 +10,11 @@
       </div>
     <% end %>
 
-    <div style="margin-left: 33%;">
-      <%= link_to 'Buy', buy_trade_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF; margin-right: 2%;' %>
-      <%= link_to 'Sell', sell_trade_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF' %>
-    </div>
-
     <% if @response %>
+      <div style="margin-left: 33%;">
+        <%= link_to 'Buy', buy_trade_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF; margin-right: 2%;' %>
+        <%= link_to 'Sell', sell_trade_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF' %>
+      </div>
       <h3>Quote</h3>
       <table class="table" style="background-color:#0CBE86; color:#FFFFFF;">
         <thead>
