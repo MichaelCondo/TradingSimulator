@@ -3,9 +3,35 @@
   <body style="background-color:black; color: white; margin-left: 16%;">
     <h1 style="margin-bottom: 3%">Sell</h1>
 
-    <% if @parameter %>
-      <h1><%= @parameter %></h1>
-    <% end %>
+    <div style="margin-bottom: 1%">
+      <% if @cash %>
+        Cash: <h5><%= format_to_currency(@cash) %></h5>
+      <% end %>
+    </div>
+
+    <div style="display: inline-block; width: 25%; margin-left: 10%; color: black; background-color:#0CBE86; padding-left: 8px; padding-top: 8px; padding-bottom: 8px; padding-right: 15px;">
+        <%= form_tag(sell_trade_path, :method => "get") do %>
+          <div class='form-group'>
+            Ticker: <%= select_tag(:ticker, options_for_select(@stock_tickers), selected: :ticker ) %>
+          </div>
+          <div class="input-group">
+            Quantity: <%= text_field_tag :quantity, params[:quantity], placeholder: "Quantity", class: "form-control" %>
+          </div>
+          <%= button_tag 'Order', class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF; margin-top: 2%;' %>
+
+          <% if params[:quantity].present? && params[:quantity].to_i > 0 %>
+            <% if params[:quantity].to_i > @current_user.portfolio.portfolio_stocks.where(:ticker => @selected_ticker).first.quantity %>
+              <div class='alert alert-danger' style="width: 100%; height: 100%; margin-top: 1%;"><%= flash[:error] %></div>
+            <% else %>
+              <%= link_to 'Preview Order', sell_order_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF; margin-top: 3%;' %>
+              <div class='alert alert-success' style="width: 100%; height: 100%; margin-top: 1%; background-color:#000000; color:#0CBE86;"><%= flash[:success] %></div>
+            <% end %>
+          <% else %>
+            <div class='alert alert-danger' style="margin-top: 1%;"><%= flash[:error] %></div>
+          <% end %>
+        <% end %>
+    </div>
+
   </body>
 
 </html>

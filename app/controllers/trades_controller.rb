@@ -69,12 +69,47 @@ class TradesController < ApplicationController
   end
 
   def sell
+    @selected_ticker = ''
     @parameter = session[:stock_parameter]
+    @current_user ||= User.find(session[:user_id])
+    @cash = @current_user.portfolio.cash
+    @stock_tickers = @current_user.portfolio.portfolio_stocks.map {|stock| [stock.ticker + ", " + stock.name]}
+
+    if params[:quantity].present? && params[:quantity].to_i > 0
+      @selected_ticker = params[:ticker].to_s.split(", ").first
+      @sold_stock = @current_user.portfolio.portfolio_stocks.where(:ticker => @selected_ticker).first
+      session[:sold_stock] = @sold_stock
+      if params[:quantity].to_i > @sold_stock.quantity
+        flash[:error] = 'Quantity exceeds how much you own'
+
+      elsif params[:quantity].to_i == @sold_stock.quantity
+        # If user wants to sell entire position, destroy PortfolioStock object
+        @price = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + @selected_ticker).parsed_response.first['price']
+        session[:sold_price] = @price
+        flash[:success] = 'Order sold'
+        session[:sell_quantity] = params[:quantity]
+      else
+        # If user only wants to sell a portion of their position
+        @price = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + @selected_ticker).parsed_response.first['price']
+        session[:sold_price] = @price
+        flash[:success] = 'Order sold'
+        session[:sell_quantity] = params[:quantity]
+      end
+    else
+      # Raise alert if no quantity or quantity <= 0
+      flash[:error] = 'Specify Quantity'
+    end
   end
 
   def buy_order
     @stock_info = session[:parsed_response]
     @quantity = session[:buy_quantity]
+  end
+
+  def sell_order
+    @quantity = session[:sell_quantity]
+    @stock_info = session[:sold_stock]
+    @sold_price = session[:sold_price]
   end
 
 end

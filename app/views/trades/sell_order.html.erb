@@ -1,0 +1,33 @@
+<html>
+
+  <body style="background-color:black; color: white; margin-left: 16%;">
+    <h1 style="margin-bottom: 3%">Sell Order</h1>
+
+    <% if @stock_info && @quantity %>
+      <h3>Order</h3>
+      <table class="table" style="background-color:#0CBE86; color:#FFFFFF;">
+        <thead>
+          <tr>
+            <th scope="col">Ticker</th>
+            <th scope="col">Name</th>
+            <th scope="col">Stock Exchange</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @stock_info['ticker'] %></td>
+            <td><%= @stock_info['name'] %></td>
+            <td><%= @stock_info['exchange'] %></td>
+            <td><%= format_to_currency(@sold_price) %></td>
+            <td><%= @quantity %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+
+    <%= link_to 'Portfolio', root_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF; margin-top: 3%;' %>
+  </body>
+
+</html>
