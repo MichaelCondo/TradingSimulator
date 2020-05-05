@@ -35,7 +35,7 @@
             <td><%= @response.parsed_response.first['name'] %></td>
             <td><%= @response.parsed_response.first['exhange'] %></td>
             <td><%= format_to_currency(@response.parsed_response.first['price']) %></td>
-            <td><%= @response.parsed_response.first['change'] %></td>
+            <td><%= format_to_currency(@response.parsed_response.first['change']) %></td>
             <td><%= @response.parsed_response.first['changesPercentage'].to_s + "%" %></td>
           </tr>
         </tbody>

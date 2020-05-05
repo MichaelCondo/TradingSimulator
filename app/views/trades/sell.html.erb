@@ -20,7 +20,7 @@
           <%= button_tag 'Order', class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF; margin-top: 2%;' %>
 
           <% if params[:quantity].present? && params[:quantity].to_i > 0 %>
-            <% if params[:quantity].to_i > @current_user.portfolio.portfolio_stocks.where(:ticker => @selected_ticker).first.quantity %>
+            <% if params[:quantity].to_i > @sell_quantity %>
               <div class='alert alert-danger' style="width: 100%; height: 100%; margin-top: 1%;"><%= flash[:error] %></div>
             <% else %>
               <%= link_to 'Preview Order', sell_order_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF; margin-top: 3%;' %>

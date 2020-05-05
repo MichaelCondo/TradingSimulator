@@ -78,6 +78,7 @@ class TradesController < ApplicationController
     if params[:quantity].present? && params[:quantity].to_i > 0
       @selected_ticker = params[:ticker].to_s.split(", ").first
       @sold_stock = @current_user.portfolio.portfolio_stocks.where(:ticker => @selected_ticker).first
+      @sell_quantity = @sold_stock.quantity
       session[:sold_stock] = @sold_stock
       if params[:quantity].to_i > @sold_stock.quantity
         flash[:error] = 'Quantity exceeds how much you own'
@@ -86,6 +87,9 @@ class TradesController < ApplicationController
         # If user wants to sell entire position, destroy PortfolioStock object
         @price = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + @selected_ticker).parsed_response.first['price']
         session[:sold_price] = @price
+        @current_user.portfolio.cash += @price * @sold_stock.quantity
+        @current_user.portfolio.portfolio_stocks.where(:ticker => @selected_ticker).first.destroy
+        @current_user.portfolio.save!
         flash[:success] = 'Order sold'
         session[:sell_quantity] = params[:quantity]
       else
