@@ -41,8 +41,13 @@ class TradesController < ApplicationController
           flash[:success] = 'Order filled'
           @book_cost = params[:quantity].to_i * @response['price']
           @response_2 = HTTParty.get('https://financialmodelingprep.com/api/v3/financials/income-statement/' + @parameter.to_s)
-          @dividend_per_share = @response_2.parsed_response['financials'].first['Dividend per Share'].to_f
-          @dividend_yield = (@dividend_per_share / @response['price']) * 100
+          if @response_2.present?
+            @dividend_per_share = @response_2.parsed_response['financials'].first['Dividend per Share'].to_f
+            @dividend_yield = (@dividend_per_share / @response['price']) * 100
+          else
+            @dividend_per_share = 0.0
+            @dividend_yield = 0.0
+          end
           # Create portfolio stock for this user's portfolio
           PortfolioStock.create!(:portfolio_id => @current_user.portfolio.id,
                                 :ticker => @response['symbol'],
@@ -96,6 +101,12 @@ class TradesController < ApplicationController
         # If user only wants to sell a portion of their position
         @price = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + @selected_ticker).parsed_response.first['price']
         session[:sold_price] = @price
+        @current_user.portfolio.cash += @price * params[:quantity].to_i
+        @current_user.portfolio.save!
+        @previous_quantity = @sold_stock.quantity
+        @sold_stock.quantity -= params[:quantity].to_i
+        @sold_stock.book_cost -= ((params[:quantity].to_f / @current_user.portfolio.portfolio_stocks.where(:ticker => @selected_ticker).first.quantity.to_f) * @sold_stock.book_cost)
+        @sold_stock.save!
         flash[:success] = 'Order sold'
         session[:sell_quantity] = params[:quantity]
       end
