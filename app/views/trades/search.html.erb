@@ -1,9 +1,10 @@
 <html>
 
   <body style="background-color:black; color: white; margin-left: 16%;">
-    <h1 style="margin-bottom: 4%">Trade</h1>
+    <h1 style="margin-bottom: 1%">Trade</h1>
 
-    <h5>Please search for stock before buying</h5>
+    <h5 style="margin-bottom: 2%">Stocks, ETFs, Mutual Funds, Commodities, Cryptocurrencies, Forex</h5>
+    <h6>Please search for security before buying</h6>
     <%= form_tag(search_trade_path, :method => "get") do %>
       <div class="input-group" style="width: 28%;">
         <%= search_field_tag :search, params[:search], placeholder: "Ticker (ex. MSFT, AAPL, AMZN)", class: "form-control" %>
@@ -16,7 +17,7 @@
       <%= link_to 'Sell', sell_trade_path, class: 'btn btn-light', style: 'background-color:#0CBE86; color:#FFFFFF' %>
     </div>
 
-    <% if @response %>
+    <% if @response.present? && @response != 'placeholder' %>
       <h3>Quote</h3>
       <table class="table" style="background-color:#0CBE86; color:#FFFFFF;">
         <thead>
@@ -40,6 +41,8 @@
           </tr>
         </tbody>
       </table>
+      <% elsif @response.blank? %>
+        <div class='alert alert-danger' style="margin-top: 1%; width: 25%;"><%= flash[:error] %></div>
     <% end %>
 
   </body>
