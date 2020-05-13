@@ -32,6 +32,10 @@ gem 'yahoo-finance', '~> 1.2', '>= 1.2.1'
 
 gem 'stock_quote'
 
+gem "chartkick"
+gem "groupdate"
+gem 'svg-graph', '~> 2.1', '>= 2.1.3'
+
 gem 'google-finance-ruby-client'
 
 gem 'devise'
