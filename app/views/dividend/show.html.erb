@@ -3,6 +3,48 @@
   <body style="background-color:black; color: white; margin-left: 16%;">
     <h1 style="margin-bottom: 1%">Dividends</h1>
 
+    <% if @has_stocks %>
+      <div style="float: left; margin-right: 5%;">
+        <h3 style="margin-top: 4%;">Holdings</h3>
+        <table class="table" style="background-color:#0CBE86; color:#FFFFFF;">
+          <thead>
+            <tr>
+              <th scope="col">Ticker</th>
+              <th scope="col">Company Name</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Annual Dividends</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @current_user.portfolio.portfolio_stocks.each do |stock| %>
+              <tr>
+                <td><%= stock.ticker %></td>
+                <td><%= stock.name %></td>
+                <td><%= stock.quantity %></td>
+                <td><%= format_to_currency(stock.quantity * stock.dividend_per_share) %></td>
+              </tr>
+            <% end; nil %>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="float: left;">
+        <h3 style="margin-top: 10%;">Stats</h3>
+        <table class="table" style="background-color:#0CBE86; color:#FFFFFF;">
+          <thead>
+            <tr>
+              <th>Total Dividends</th>
+              <th><%= format_to_currency(@total_dividends) %></th>
+            </tr>
+            <tr>
+              <th>Monthly Average</th>
+              <th><%= format_to_currency(@total_dividends / 12.0) %></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    <% end %>
+
   </body>
 
 </html>
