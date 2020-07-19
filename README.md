@@ -1,24 +1,15 @@
-# README
+# Trade X
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Trade X is a Stock Trading Simulator built using a Ruby on Rails backend, PostgreSQL database,
+and an HTML, CSS, and Bootstrap frontend.
 
-Things you may want to cover:
+Trade X allows users to trade:
 
-* Ruby version
+* Stocks
+* ETFs
+* Mutual Funds
+* Commodities
+* Cryptocurrencies
+* Forex
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+All data is gathered using a real-time API called Financial Modelling Prep

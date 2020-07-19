@@ -9,7 +9,7 @@ class TradesController < ApplicationController
     else
       @parameter = params[:search].upcase
       session[:stock_parameter] = @parameter
-      @response = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + @parameter.to_s)
+      @response = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + @parameter.to_s + '?apikey=d1ab619d29bd0fe7295476a5caa8049d')
       if @response.present?
         session[:parsed_response] = @response.parsed_response.first
       else
@@ -45,7 +45,7 @@ class TradesController < ApplicationController
           session[:buy_quantity] = params[:quantity]
           flash[:success] = 'Order filled'
           @book_cost = params[:quantity].to_i * @response['price']
-          @response_2 = HTTParty.get('https://financialmodelingprep.com/api/v3/financials/income-statement/' + @parameter.to_s)
+          @response_2 = HTTParty.get('https://financialmodelingprep.com/api/v3/financials/income-statement/' + @parameter.to_s + '?apikey=d1ab619d29bd0fe7295476a5caa8049d')
           if @response_2.present?
             @dividend_per_share = @response_2.parsed_response['financials'].first['Dividend per Share'].to_f
             @dividend_yield = (@dividend_per_share / @response['price']) * 100
@@ -95,7 +95,7 @@ class TradesController < ApplicationController
 
       elsif params[:quantity].to_i == @sold_stock.quantity
         # If user wants to sell entire position, destroy PortfolioStock object
-        @price = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + @selected_ticker).parsed_response.first['price']
+        @price = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + @selected_ticker + '?apikey=d1ab619d29bd0fe7295476a5caa8049d').parsed_response.first['price']
         session[:sold_price] = @price
         @current_user.portfolio.cash += @price * @sold_stock.quantity
         @current_user.portfolio.portfolio_stocks.where(:ticker => @selected_ticker).first.destroy
@@ -104,7 +104,7 @@ class TradesController < ApplicationController
         session[:sell_quantity] = params[:quantity]
       else
         # If user only wants to sell a portion of their position
-        @price = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + @selected_ticker).parsed_response.first['price']
+        @price = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + @selected_ticker + '?apikey=d1ab619d29bd0fe7295476a5caa8049d').parsed_response.first['price']
         session[:sold_price] = @price
         @current_user.portfolio.cash += @price * params[:quantity].to_i
         @current_user.portfolio.save!

@@ -9,7 +9,7 @@ class PortfoliosController < ApplicationController
       @port_inv_value = 0.0
       @book_cost = 0.0
       @current_user.portfolio.portfolio_stocks.each do |stock|
-        @response = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + stock.ticker)
+        @response = HTTParty.get('https://financialmodelingprep.com/api/v3/quote/' + stock.ticker + '?apikey=d1ab619d29bd0fe7295476a5caa8049d')
         stock.current_price = @response.parsed_response.first['price']
         stock.market_value = @response.parsed_response.first['price'] * stock.quantity
         stock.gain_loss = (@response.parsed_response.first['price'] * stock.quantity) - stock.book_cost
